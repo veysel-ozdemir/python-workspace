@@ -64,7 +64,7 @@ if os.path.exists("file_operations\\phone_list.txt"):
 else:
     print("The file you wish to delete doesn't exist")
 
-# using with
+# with-statement: handling the errors
 with open("file_operations\\more_names.txt") as f:
     content = f.read()
 
