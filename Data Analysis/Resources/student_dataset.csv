@@ -1,0 +1,101 @@
+"Student_ID","Gender","Race_Ethnicity","Parental_Education","Lunch","Test_Preparation_Course","Math_Score","Reading_Score","Writing_Score"
+1,"Male","Group B","High School","Paid","None",55,94,91
+2,"Male","Group A","High School","Paid","None",90,95,58
+3,"Male","Group B","Associate's Degree","Free","None",42,87,100
+4,"Male","Group E","Some College","Free","Completed",95,47,97
+5,"Female","Group E","College","Paid","None",71,71,82
+6,"Female","Group D","Master's Degree","Free","Completed",60,42,86
+7,"Female","Group A","Master's Degree","Paid","Completed",78,80,57
+8,"Female","Group D","Associate's Degree","Paid","None",42,87,79
+9,"Male","Group B","High School","Paid","None",49,50,63
+10,"Female","Group B","College","Paid","None",60,52,81
+11,"Male","Group C","Associate's Degree","Paid","Completed",81,78,68
+12,"Female","Group E","Master's Degree","Free","None",46,57,73
+13,"Male","Group E","Some College","Free","None",58,78,61
+14,"Female","Group C","High School","Paid","None",68,60,43
+15,"Male","Group D","High School","Free","Completed",84,44,62
+16,"Male","Group E","High School","Free","None",81,70,56
+17,"Female","Group A","College","Paid","None",94,95,83
+18,"Female","Group D","Some College","Paid","None",85,59,94
+19,"Female","Group A","Master's Degree","Free","Completed",63,57,59
+20,"Female","Group A","Associate's Degree","Free","Completed",68,78,90
+21,"Male","Group E","Associate's Degree","Paid","Completed",95,88,78
+22,"Male","Group C","Master's Degree","Paid","Completed",69,97,48
+23,"Male","Group A","High School","Paid","None",82,42,58
+24,"Male","Group B","Associate's Degree","Paid","Completed",84,87,60
+25,"Male","Group E","High School","Paid","None",74,47,82
+26,"Female","Group A","High School","Free","None",81,58,82
+27,"Male","Group E","Master's Degree","Free","Completed",90,89,83
+28,"Male","Group E","College","Free","None",73,49,56
+29,"Male","Group A","High School","Free","None",78,54,73
+30,"Male","Group B","Some College","Paid","Completed",91,100,91
+31,"Female","Group C","Associate's Degree","Free","Completed",60,51,46
+32,"Female","Group B","Some College","Free","None",92,74,88
+33,"Female","Group B","Master's Degree","Paid","None",82,91,43
+34,"Female","Group A","Master's Degree","Paid","None",97,87,84
+35,"Male","Group C","College","Free","Completed",82,71,90
+36,"Female","Group A","Master's Degree","Free","Completed",65,100,40
+37,"Male","Group E","Some College","Paid","None",72,93,67
+38,"Female","Group A","High School","Paid","Completed",92,81,56
+39,"Female","Group C","High School","Free","None",45,73,75
+40,"Female","Group A","High School","Paid","Completed",97,79,96
+41,"Male","Group C","College","Paid","None",62,40,73
+42,"Male","Group E","Associate's Degree","Free","None",81,52,66
+43,"Female","Group A","Some College","Free","Completed",80,46,68
+44,"Female","Group A","Some College","Free","None",99,50,65
+45,"Female","Group B","Some College","Paid","Completed",83,50,96
+46,"Female","Group B","Some College","Free","Completed",99,52,60
+47,"Female","Group D","Associate's Degree","Free","None",84,76,79
+48,"Female","Group D","Associate's Degree","Paid","None",57,73,74
+49,"Female","Group B","Master's Degree","Free","Completed",86,54,97
+50,"Male","Group B","High School","Paid","None",60,76,52
+51,"Female","Group D","College","Paid","Completed",72,53,73
+52,"Male","Group D","Master's Degree","Paid","Completed",50,76,94
+53,"Female","Group B","Associate's Degree","Free","Completed",79,65,75
+54,"Female","Group A","Some College","Free","Completed",84,88,80
+55,"Female","Group A","Some College","Paid","Completed",53,67,82
+56,"Female","Group B","High School","Free","None",41,57,67
+57,"Male","Group B","College","Paid","None",77,98,49
+58,"Female","Group A","Associate's Degree","Free","None",84,93,71
+59,"Male","Group D","Some College","Paid","Completed",74,56,85
+60,"Male","Group C","High School","Paid","None",67,89,66
+61,"Male","Group E","Some College","Free","None",84,78,72
+62,"Female","Group B","College","Free","Completed",55,84,40
+63,"Female","Group D","High School","Paid","Completed",90,73,53
+64,"Female","Group B","College","Free","Completed",55,51,91
+65,"Female","Group C","College","Free","None",84,69,97
+66,"Female","Group B","Associate's Degree","Paid","Completed",84,74,92
+67,"Female","Group A","Master's Degree","Paid","None",47,59,71
+68,"Male","Group D","Associate's Degree","Paid","None",96,65,67
+69,"Female","Group E","Some College","Paid","Completed",100,64,82
+70,"Male","Group B","High School","Paid","None",94,47,71
+71,"Female","Group A","College","Free","None",84,59,80
+72,"Male","Group A","High School","Paid","None",77,67,69
+73,"Female","Group E","College","Free","Completed",77,94,90
+74,"Female","Group C","Master's Degree","Free","None",47,85,76
+75,"Female","Group D","Associate's Degree","Free","Completed",97,72,92
+76,"Female","Group B","Master's Degree","Paid","Completed",70,95,73
+77,"Male","Group A","High School","Paid","None",76,85,80
+78,"Male","Group E","Some College","Paid","None",62,60,74
+79,"Male","Group C","Some College","Free","None",80,95,63
+80,"Male","Group B","Associate's Degree","Paid","Completed",49,89,83
+81,"Female","Group E","Master's Degree","Free","Completed",98,95,73
+82,"Male","Group C","College","Paid","Completed",99,73,98
+83,"Female","Group D","Some College","Paid","None",97,44,63
+84,"Male","Group B","High School","Free","None",50,81,100
+85,"Male","Group A","High School","Paid","None",66,51,67
+86,"Female","Group C","Master's Degree","Paid","None",62,42,87
+87,"Female","Group C","Some College","Free","None",72,97,57
+88,"Male","Group D","College","Free","Completed",61,57,69
+89,"Male","Group D","Some College","Free","Completed",54,89,61
+90,"Male","Group D","College","Paid","Completed",43,89,65
+91,"Male","Group C","College","Paid","Completed",99,86,88
+92,"Female","Group A","Associate's Degree","Free","Completed",78,40,59
+93,"Male","Group A","Master's Degree","Paid","None",82,47,70
+94,"Female","Group A","Associate's Degree","Free","Completed",49,90,79
+95,"Female","Group E","Master's Degree","Paid","Completed",47,79,69
+96,"Female","Group D","Associate's Degree","Free","None",70,69,47
+97,"Male","Group A","College","Free","None",67,59,90
+98,"Female","Group E","Some College","Paid","Completed",74,90,86
+99,"Female","Group D","High School","Paid","Completed",84,73,64
+100,"Female","Group A","College","Paid","Completed",59,60,97
