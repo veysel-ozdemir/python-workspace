@@ -1,0 +1,11 @@
+
+
+black,4.7,170,yes,2,android,samsung
+
+ash grey,7.2,195,no,4,android,huawei
+blue,6.8,205,no,3,ios,apple
+
+white,5.7,200,no,3,android,samsung
+ash grey,5.2,295,no,5,android,huawei
+red,8.8,245,yes,2,ios,apple
+
