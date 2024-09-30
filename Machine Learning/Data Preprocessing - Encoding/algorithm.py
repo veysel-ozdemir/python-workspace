@@ -30,8 +30,10 @@ categorical_features = dict()
 # Value = number of first occurrence in list (1,2,3,..)
 targets = dict()
 
+# Initialize a dictionary to store encode values
+encoding_values = dict()
+
 # Define path of dataset file
-# file_path = '../Datasets/iris/iris.data'
 file_path = "test-data.csv"
 
 # Read all lines of the file
@@ -132,6 +134,26 @@ for i in processed_dataset:
     print(i)
 print()
 
+print("Categorical features:")
+for i in categorical_features.items():
+    print(i)
+print()
+
+print("Integer typed features:")
+for i in integer_typed_features.items():
+    print(i)
+print()
+
+print("Continuous typed features:")
+for i in continuous_typed_features.items():
+    print(i)
+print()
+
+print("Target variables:")
+for i in targets.items():
+    print(i)
+print()
+
 
 # Function of encoding target variable (class) of the dataset
 def encode_target_variable(targets_count, target_value) -> list:
@@ -157,11 +179,41 @@ def encode_target_variable(targets_count, target_value) -> list:
     return binary_logic_map
 
 
+# Go through all columns of each row and store the encoding values
+for col in range(0, len(processed_dataset[0])):
+    for row in range(0, len(processed_dataset)):
+        # Get the value
+        value = processed_dataset[row][col]
+        # If the value is categorical value and not already stored in dictionary
+        if (not is_numeric(value)) and (not value in list(encoding_values.values())):
+            # Assign the value to the incremented key value
+            encoding_values[len(encoding_values) + 1] = value
+
+print("Encoding map of categorical features:")
+for i in encoding_values.items():
+    print(i)
+print()
+
 # Encode the target values according to the binary logic map
 for i in range(0, len(processed_dataset)):
     processed_dataset[i] = processed_dataset[i][:-1] + encode_target_variable(
         len(targets.keys()), processed_dataset[i][-1]
     )
+
+# Display the processed rows after target encoding
+print("Processed dataset after target variable encoding:")
+for i in processed_dataset:
+    print(i)
+print()
+
+
+# Get the key of specified unique value of the dictionary
+def get_key_of_by_value(dict, value):
+    for key, val in dict.items():
+        if val == value:
+            return key
+    return None
+
 
 # Combine all variables according to their indexes
 for row in range(0, len(processed_dataset)):
@@ -186,7 +238,7 @@ for row in range(0, len(processed_dataset)):
         elif col in list(categorical_features.keys()):  # Index check
             for feats in list(categorical_features.get(col).keys()):
                 if feats == processed_dataset[row][col]:
-                    instance.append(categorical_features[col][feats])
+                    instance.append(get_key_of_by_value(encoding_values, feats))
 
         # Target values
         else:
@@ -194,12 +246,6 @@ for row in range(0, len(processed_dataset)):
 
     # Add the instance to new dataset list
     encoded_dataset.append(instance)
-
-# Display the processed rows after target encoding
-print("Processed dataset after target variable encoding:")
-for i in processed_dataset:
-    print(i)
-print()
 
 # Display the encoded rows
 print("Encoded dataset:")
