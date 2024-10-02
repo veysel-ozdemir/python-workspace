@@ -254,7 +254,7 @@ def get_key_of_by_value(dict, value):
     return None
 
 
-# ! Calculate the average values
+# Calculate the average values
 for col in range(0, len(processed_dataset[0]) - len(targets.keys())):
     # Go through all variables and find the right index
     for row in range(0, len(processed_dataset)):
