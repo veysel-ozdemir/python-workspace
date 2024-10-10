@@ -1,7 +1,5 @@
 # Data Preprocessing - Encoding Algorithm
 
-# todo : Work on the target variable index. It should be changeable and not constraint as being at the end.
-
 # ! Assumed that the target variable (class) is located at the last index of a list !
 
 # Initialize a list to store the processed dataset
@@ -47,7 +45,7 @@ sums = dict()
 line_count = 0
 
 # Define path of dataset file
-file_path = "missing-value-test.csv"
+file_path = "Custom Datasets/missing-value-test.csv"
 
 # Read all lines of the file
 with open(file_path, "r") as file:
