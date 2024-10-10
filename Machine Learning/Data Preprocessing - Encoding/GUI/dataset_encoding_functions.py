@@ -1,5 +1,5 @@
 # Encode dataset with missing values
-def encode_with_missing_values(data):
+def encode_with_missing_values(data, target_variable):
     # Initialize a list to store the processed dataset
     processed_dataset = []
     # Initialize a list to store the encoded dataset
@@ -32,6 +32,18 @@ def encode_with_missing_values(data):
     sums = dict()
     # Initilize line counter
     line_count = 0
+    # Initialize a list to store the labels
+    labels = []
+
+    # Get the line where the labels reside
+    for line_number in range(0, len(data)):
+        if not data[line_number].isspace():
+            labels_line = data.pop(line_number).strip().split(",")
+            break
+
+    # Store the labels
+    for label in labels_line:
+        labels.append(label)
 
     # Control whether the value is numeric
     def is_numeric(value) -> bool:
@@ -53,84 +65,90 @@ def encode_with_missing_values(data):
             values = line.strip().split(",")
 
             # If the target variable exists, perform the encoding process
-            if values[-1] != "?":
-                for index in range(0, len(values) - 1):
+            if values[labels.index(target_variable)] != "?":
+                for index in range(0, len(values)):
                     value = values[index]
-                    # Check whether the feature is numeric
-                    if is_numeric(value):
-                        # If the value is floating-point number
-                        if len(value.split(".")) > 1:
-                            instance.append(float(value))
+                    # Check whether the variable is not the target
+                    if index != labels.index(target_variable):
+                        # Check whether the feature is numeric
+                        if is_numeric(value):
+                            # If the value is floating-point number
+                            if len(value.split(".")) > 1:
+                                instance.append(float(value))
 
-                            # Process the continuous typed feature values for future encoding
-                            # Get dictionary of continuous typed features at index
-                            feats = continuous_typed_features.get(index)
+                                # Process the continuous typed feature values for future encoding
+                                # Get dictionary of continuous typed features at index
+                                feats = continuous_typed_features.get(index)
 
-                            # The feature is present in the dictionary
-                            if feats is not None:
-                                if float(value) not in list(feats.keys()):
-                                    continuous_typed_features[index][float(value)] = (
-                                        float(value)
-                                    )
-                            # The feature is not present yet
-                            else:
-                                # Add the feature to dictionary
-                                continuous_typed_features[index] = {
-                                    float(value): float(value)
-                                }
-                        # If the value is integer
-                        elif len(value.split(".")) == 1:
-                            instance.append(int(value))
+                                # The feature is present in the dictionary
+                                if feats is not None:
+                                    if float(value) not in list(feats.keys()):
+                                        continuous_typed_features[index][
+                                            float(value)
+                                        ] = float(value)
+                                # The feature is not present yet
+                                else:
+                                    # Add the feature to dictionary
+                                    continuous_typed_features[index] = {
+                                        float(value): float(value)
+                                    }
+                            # If the value is integer
+                            elif len(value.split(".")) == 1:
+                                instance.append(int(value))
 
-                            # Process the integer typed feature values for future encoding
-                            # Get dictionary of integer typed features at index
-                            feats = integer_typed_features.get(index)
+                                # Process the integer typed feature values for future encoding
+                                # Get dictionary of integer typed features at index
+                                feats = integer_typed_features.get(index)
 
-                            # The feature is present in the dictionary
-                            if feats is not None:
-                                if int(value) not in list(feats.keys()):
-                                    integer_typed_features[index][int(value)] = int(
-                                        value
-                                    )
-                            # The feature is not present yet
-                            else:
-                                # Add the feature to dictionary
-                                integer_typed_features[index] = {int(value): int(value)}
-                    # In case of non-numeric values
-                    else:
-                        instance.append(value)
-
-                        # If the value is missing
-                        if value == "?":
-                            if index in list(missing_values.keys()):
-                                missing_values[index][line_count] = (
-                                    len(missing_values[index]) + 1
-                                )
-                            else:
-                                missing_values[index] = {line_count: 1}
+                                # The feature is present in the dictionary
+                                if feats is not None:
+                                    if int(value) not in list(feats.keys()):
+                                        integer_typed_features[index][int(value)] = int(
+                                            value
+                                        )
+                                # The feature is not present yet
+                                else:
+                                    # Add the feature to dictionary
+                                    integer_typed_features[index] = {
+                                        int(value): int(value)
+                                    }
+                        # In case of non-numeric values
                         else:
-                            # Process the categorical feature values for future encoding
-                            # Get dictionary of categorical features at index
-                            feats = categorical_features.get(index)
+                            instance.append(value)
 
-                            # The feature is present in the dictionary
-                            if feats is not None:
-                                if value not in list(feats.keys()):
-                                    categorical_features[index][value] = (
-                                        len(feats.keys()) + 1
+                            # If the value is missing
+                            if value == "?":
+                                if index in list(missing_values.keys()):
+                                    missing_values[index][line_count] = (
+                                        len(missing_values[index]) + 1
                                     )
-                            # The feature is not present yet
+                                else:
+                                    missing_values[index] = {line_count: 1}
                             else:
-                                # Add the feature to dictionary
-                                categorical_features[index] = {value: 1}
+                                # Process the categorical feature values for future encoding
+                                # Get dictionary of categorical features at index
+                                feats = categorical_features.get(index)
 
-                # Process the target values for future encoding
-                # Check for new target values
-                if values[-1] not in list(targets.keys()):
-                    targets[values[-1]] = len(targets.keys()) + 1
+                                # The feature is present in the dictionary
+                                if feats is not None:
+                                    if value not in list(feats.keys()):
+                                        categorical_features[index][value] = (
+                                            len(feats.keys()) + 1
+                                        )
+                                # The feature is not present yet
+                                else:
+                                    # Add the feature to dictionary
+                                    categorical_features[index] = {value: 1}
+                    # If it is the target variable
+                    else:
+                        # Process the target values for future encoding
+                        # Check for new target values
+                        if value not in list(targets.keys()):
+                            # Store it to the dictionary
+                            targets[value] = len(targets.keys()) + 1
 
-                # Append the target value to the list
-                instance.append(targets.get(values[-1]))
+                        # Append the target value to the list
+                        instance.append(targets.get(value))
 
                 # Add the instance to the processed dataset
                 processed_dataset.append(instance)
@@ -175,21 +193,15 @@ def encode_with_missing_values(data):
                 # Assign the value to the incremented key value
                 encoding_values[len(encoding_values) + 1] = value
 
-    # Encode the target values according to the binary logic map
-    for i in range(0, len(processed_dataset)):
-        processed_dataset[i] = processed_dataset[i][:-1] + encode_target_variable(
-            len(targets.keys()), processed_dataset[i][-1]
-        )
-
     # Get the key of specified unique value of the dictionary
-    def get_key_of_by_value(dict, value):
+    def get_key_by_value(dict, value):
         for key, val in dict.items():
             if val == value:
                 return key
         return None
 
     # Calculate the average values
-    for col in range(0, len(processed_dataset[0]) - len(targets.keys())):
+    for col in range(0, (len(processed_dataset[0]))):
         # Go through all variables and find the right index
         for row in range(0, len(processed_dataset)):
             if col in list(missing_values.keys()):
@@ -201,14 +213,14 @@ def encode_with_missing_values(data):
                     if not is_numeric(value):
                         # The feature is present in the dictionary
                         if sums.get(col) is not None:
-                            sums[col]["sum"] += get_key_of_by_value(
+                            sums[col]["sum"] += get_key_by_value(
                                 encoding_values, processed_dataset[row][col]
                             )
                             sums[col]["total"] += 1
                         # The feature is not present in the dictionary
                         else:
                             sums[col] = {
-                                "sum": get_key_of_by_value(
+                                "sum": get_key_by_value(
                                     encoding_values, processed_dataset[row][col]
                                 ),
                                 "total": 1,
@@ -270,7 +282,7 @@ def encode_with_missing_values(data):
                 elif col in list(categorical_features.keys()):  # Index check
                     for feats in list(categorical_features.get(col).keys()):
                         if feats == processed_dataset[row][col]:
-                            instance.append(get_key_of_by_value(encoding_values, feats))
+                            instance.append(get_key_by_value(encoding_values, feats))
 
                 # Target values
                 else:
@@ -278,5 +290,22 @@ def encode_with_missing_values(data):
 
         # Add the instance to new dataset list
         encoded_dataset.append(instance)
+
+    # Copy the encoded dataset
+    tmp = encoded_dataset.copy()
+    # Encode the target values according to the binary logic map
+    for i in range(0, len(tmp)):
+        # Initialize list of the edited row
+        edited_row = []
+        for j in range(0, len(tmp[0])):
+            # If the value is not target variable
+            if j != labels.index(target_variable):
+                edited_row.append(tmp[i][j])
+        # Append at the end the target variable as binary logic map
+        edited_row += encode_target_variable(
+            len(targets.keys()), tmp[i][labels.index(target_variable)]
+        )
+        # Update the processed_dataset
+        encoded_dataset[i] = edited_row
 
     return encoded_dataset

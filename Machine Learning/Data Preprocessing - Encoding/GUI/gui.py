@@ -18,6 +18,7 @@ class DatasetEncoderApp(tk.Tk):
 
         # Store the dataset and encoded dataset
         self.dataset = []
+        self.target_variable = tk.StringVar()
 
     def center_window(self):
         # Get the screen width and height
@@ -49,22 +50,40 @@ class DatasetEncoderApp(tk.Tk):
 
                 messagebox.showinfo("Success", "Dataset uploaded successfully!")
 
-                # Show "Encode Dataset" button
-                self.show_encode_button()
+                # Show the target variable input field
+                self.show_target_variable_input()
             except Exception as e:
                 messagebox.showerror("Error", f"Failed to load dataset: {str(e)}")
 
+    def show_target_variable_input(self):
+        # Target variable label and entry
+        target_label = tk.Label(self, text="Enter Target Variable Name:")
+        target_label.pack(pady=5)
+
+        self.target_entry = tk.Entry(self, textvariable=self.target_variable)
+        self.target_entry.pack(pady=5)
+
+        # Show the "Encode Dataset" button
+        self.show_encode_button()
+
     def show_encode_button(self):
-        # Create and show the "Encode Dataset" button below the "Upload Dataset" button
+        # Create and show the "Encode Dataset" button below the target variable input
         self.encode_button = tk.Button(
             self, text="Encode Dataset", command=self.encode_and_display_dataset
         )
         self.encode_button.pack(pady=10)
 
     def encode_and_display_dataset(self):
+        # Check if the target variable field is empty
+        if not self.target_variable.get().strip():
+            messagebox.showerror("Input Error", "Target Variable Name cannot be empty.")
+            return
+
         if self.dataset:
             # Encode the dataset using the provided function
-            encoded_dataset = encode_with_missing_values(self.dataset)
+            encoded_dataset = encode_with_missing_values(
+                self.dataset, self.target_variable.get()
+            )
 
             # Clear previous view and display the encoded dataset in a grid
             self.show_encoded_dataset(encoded_dataset)
