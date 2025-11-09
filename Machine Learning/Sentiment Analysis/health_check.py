@@ -1,5 +1,27 @@
 import torch
+import tensorflow as tf
 
+# PyTorch GPU/MPS check
 print(torch.backends.mps.is_available(), torch.backends.mps.is_built())
 x = torch.rand(5, 3)
 print(x)
+
+# TensorFlow GPU/MPS check
+print("TensorFlow version:", tf.__version__)
+print("Num GPUs Available: ", len(tf.config.list_physical_devices("GPU")))
+print("GPU Devices: ", tf.config.list_physical_devices("GPU"))
+print("All devices: ", tf.config.list_physical_devices())
+
+# Simple model to test GPU/MPS functionality
+cifar = tf.keras.datasets.cifar100
+(x_train, y_train), (x_test, y_test) = cifar.load_data()
+model = tf.keras.applications.ResNet50(
+    include_top=True,
+    weights=None,
+    input_shape=(32, 32, 3),
+    classes=100,
+)
+
+loss_fn = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False)
+model.compile(optimizer="adam", loss=loss_fn, metrics=["accuracy"])
+model.fit(x_train, y_train, epochs=5, batch_size=64)
