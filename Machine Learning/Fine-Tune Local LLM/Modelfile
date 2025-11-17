@@ -1,0 +1,6 @@
+FROM finetuned_model/unsloth.Q4_K_M.gguf
+
+# Install the model with Ollama:
+# - ollama create finetunedmodel -f Modelfile
+# Run the model:
+# - ollama run finetunedmodel
